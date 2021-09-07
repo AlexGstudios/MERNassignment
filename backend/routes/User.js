@@ -45,6 +45,14 @@ userRouter
       default:
         return userActions.notFound(res);
     }
+  })
+  .delete(passport.authenticate("jwt", { session: false }), (req, res) => {
+    switch (req.params.name) {
+      case "deleteuser":
+        return userActions.deleteUser(req, res);
+      default:
+        return userActions.notFound(res);
+    }
   });
 
 module.exports = userRouter;

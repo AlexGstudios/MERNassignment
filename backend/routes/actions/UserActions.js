@@ -48,16 +48,37 @@ const registerUser = (req, res) => {
   });
 };
 
+const changePassword = (err, user, newPassword, res) => {
+  if (err) {
+    return errorResponse(res);
+  }
+  if (!user) {
+    errorResponse(res, 400, "Current password is incorrect");
+  } else {
+    // pre call does not work as expected with findOneAndUpdate, use save instead
+    user.password = newPassword;
+    user.save((err) => {
+      if (err) {
+        errorResponse(res);
+      } else {
+        messageResponse(res, "Password changed");
+      }
+    });
+  }
+};
+
 const updateUser = (req, res) => {
-  const { _id } = req.user._id;
-  const { username, password } = req.body;
-  // TODO: fix update password
-  // TODO: check again for duplicate usernames if changing username
-  User.findByIdAndUpdate(_id, { username }, (err, user) => {
+  const { currentPassword, newPassword } = req.body;
+  req.user.comparePassword(currentPassword, changePassword, newPassword, res);
+};
+
+const deleteUser = (req, res) => {
+  req.user.delete((err) => {
     if (err) {
       errorResponse(res);
     } else {
-      messageResponse(res, "User updated");
+      res.clearCookie("authToken");
+      messageResponse(res, "User deleted", false, { username: "" });
     }
   });
 };
@@ -89,7 +110,7 @@ const getAllBottles = (req, res) => {
       } else {
         messageResponse(
           res,
-          "Whiskey bottles list",
+          "Whisky bottles list",
           true,
           undefined,
           user.bottles
@@ -116,4 +137,5 @@ module.exports = {
   checkAuth,
   notFound,
   updateUser,
+  deleteUser,
 };

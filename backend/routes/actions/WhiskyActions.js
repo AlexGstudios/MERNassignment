@@ -3,12 +3,11 @@ const { messageResponse, errorResponse } = require("./Responses");
 
 // search by title or region, using "search" req arg, max 10 results
 const findWhisky = (req, res) => {
-  const { search } = req.body;
   Whisky.find(
     {
       $or: [
-        { title: { $regex: search, $options: "i" } },
-        { region: { $regex: search, $options: "i" } },
+        { title: { $regex: req.query.search, $options: "i" } },
+        { region: { $regex: req.query.search, $options: "i" } },
       ],
     },
     (err, whiskies) => {

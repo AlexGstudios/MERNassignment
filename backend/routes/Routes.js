@@ -19,7 +19,7 @@ router.post(
   }
 );
 
-router.post("/whisky", (req, res) => {
+router.get("/whisky", (req, res) => {
   whiskyActions.findWhisky(req, res);
 });
 

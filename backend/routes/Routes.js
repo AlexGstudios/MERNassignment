@@ -3,14 +3,15 @@ const passport = require("passport");
 const passportConfig = require("../passport");
 const userActions = require("./actions/UserActions");
 const bottleActions = require("./actions/BottleActions");
-const userRouter = express.Router();
+const whiskyActions = require("./actions/WhiskyActions");
 const errorResponse = require("./actions/Responses");
+const router = express.Router();
 
-userRouter.post("/register", (req, res) => {
+router.post("/register", (req, res) => {
   userActions.registerUser(req, res);
 });
 
-userRouter.post(
+router.post(
   "/login",
   passport.authenticate("local", { session: false }),
   (req, res) => {
@@ -18,7 +19,11 @@ userRouter.post(
   }
 );
 
-userRouter
+router.post("/whisky", (req, res) => {
+  whiskyActions.findWhisky(req, res);
+});
+
+router
   .route("/:name")
   .get(passport.authenticate("jwt", { session: false }), (req, res) => {
     switch (req.params.name) {
@@ -57,7 +62,7 @@ userRouter
     }
   });
 
-userRouter
+router
   .route("/bottles/:id")
   .get(passport.authenticate("jwt", { session: false }), (req, res) => {
     return bottleActions.getSingleBottle(req, res);
@@ -69,4 +74,4 @@ userRouter
     return bottleActions.deleteBottle(req, res);
   });
 
-module.exports = userRouter;
+module.exports = router;

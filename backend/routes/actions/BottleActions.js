@@ -6,7 +6,7 @@ const getAllBottles = (req, res) => {
     if (err) {
       errorResponse(res);
     } else {
-      messageResponse(res, "Whisky bottles list", true, undefined, bottles);
+      messageResponse(res, bottles, true);
     }
   });
 };
@@ -19,7 +19,7 @@ const getSingleBottle = (req, res) => {
     if (bottle.length < 1) {
       errorResponse(res, 404, "Bottle not found");
     } else {
-      messageResponse(res, "Bottle", true, undefined, bottle[0]);
+      messageResponse(res, bottle[0], true);
     }
   });
 };

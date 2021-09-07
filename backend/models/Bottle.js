@@ -14,7 +14,13 @@ const BottleSchema = mongoose.Schema({
   destillery: {
     type: String,
   },
-  grade: {
+  rating: {
+    type: String,
+  },
+  region: {
+    type: String,
+  },
+  detail_img_url: {
     type: String,
   },
   userId: {

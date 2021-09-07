@@ -11,12 +11,11 @@ const errorResponse = (
   });
 };
 
-const messageResponse = (res, message, isAuthenticated, user, bottles) => {
+const messageResponse = (res, message, isAuthenticated, user) => {
   return res.status(200).json({
     message: { msgBody: message, msgError: false },
     isAuthenticated,
     user,
-    bottles,
   });
 };
 

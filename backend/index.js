@@ -17,7 +17,6 @@ mongoose.connect(
   _DB_CON,
   { useNewUrlParser: true, useUnifiedTopology: true, autoIndex: true },
   () => {
-    console.log(_DB_CON);
     console.log("db connection established");
   }
 );

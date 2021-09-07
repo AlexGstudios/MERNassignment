@@ -1,4 +1,3 @@
-const Bottle = require("../../models/Bottle");
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 const { messageResponse, errorResponse } = require("./Responses");
@@ -83,59 +82,16 @@ const deleteUser = (req, res) => {
   });
 };
 
-const saveBottle = (req, res) => {
-  const bottle = new Bottle(req.body);
-  bottle.save((err) => {
-    if (err) {
-      errorResponse(res);
-    } else {
-      req.user.bottles.push(bottle);
-      req.user.save((err) => {
-        if (err) {
-          errorResponse(res);
-        } else {
-          messageResponse(res, "Bottle saved successfully", true);
-        }
-      });
-    }
-  });
-};
-
-const getAllBottles = (req, res) => {
-  User.findById({ _id: req.user.id })
-    .populate("bottles")
-    .exec((err, user) => {
-      if (err) {
-        errorResponse(res);
-      } else {
-        messageResponse(
-          res,
-          "Whisky bottles list",
-          true,
-          undefined,
-          user.bottles
-        );
-      }
-    });
-};
-
-const notFound = (res) => {
-  errorResponse(res, 404, "Page not found");
-};
-
 const logoutUser = (res) => {
   res.clearCookie("authToken");
   messageResponse(res, "Logged out", false, { username: "" });
 };
 
 module.exports = {
-  saveBottle,
   registerUser,
   loginUser,
   logoutUser,
-  getAllBottles,
   checkAuth,
-  notFound,
   updateUser,
   deleteUser,
 };

@@ -2,7 +2,9 @@ const express = require("express");
 const passport = require("passport");
 const passportConfig = require("../passport");
 const userActions = require("./actions/UserActions");
+const bottleActions = require("./actions/BottleActions");
 const userRouter = express.Router();
+const errorResponse = require("./actions/Responses");
 
 userRouter.post("/register", (req, res) => {
   userActions.registerUser(req, res);
@@ -25,17 +27,17 @@ userRouter
       case "logout":
         return userActions.logoutUser(res);
       case "getbottles":
-        return userActions.getAllBottles(req, res);
+        return bottleActions.getAllBottles(req, res);
       default:
-        return userActions.notFound(req, res);
+        errorResponse(res, 404, "Page not found");
     }
   })
   .post(passport.authenticate("jwt", { session: false }), (req, res) => {
     switch (req.params.name) {
       case "newbottle":
-        return userActions.saveBottle(req, res);
+        return bottleActions.saveBottle(req, res);
       default:
-        return userActions.notFound(res);
+        errorResponse(res, 404, "Page not found");
     }
   })
   .put(passport.authenticate("jwt", { session: false }), (req, res) => {
@@ -43,7 +45,7 @@ userRouter
       case "updateuser":
         return userActions.updateUser(req, res);
       default:
-        return userActions.notFound(res);
+        errorResponse(res, 404, "Page not found");
     }
   })
   .delete(passport.authenticate("jwt", { session: false }), (req, res) => {
@@ -51,8 +53,20 @@ userRouter
       case "deleteuser":
         return userActions.deleteUser(req, res);
       default:
-        return userActions.notFound(res);
+        errorResponse(res, 404, "Page not found");
     }
+  });
+
+userRouter
+  .route("/bottles/:id")
+  .get(passport.authenticate("jwt", { session: false }), (req, res) => {
+    return bottleActions.getSingleBottle(req, res);
+  })
+  .put(passport.authenticate("jwt", { session: false }), (req, res) => {
+    return bottleActions.updateBottle(req, res);
+  })
+  .delete(passport.authenticate("jwt", { session: false }), (req, res) => {
+    return bottleActions.deleteBottle(req, res);
   });
 
 module.exports = userRouter;

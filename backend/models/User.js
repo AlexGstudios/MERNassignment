@@ -10,12 +10,6 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  bottles: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Bottle",
-    },
-  ],
 });
 
 UserSchema.pre("save", function (next) {

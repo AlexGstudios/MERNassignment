@@ -17,6 +17,10 @@ const BottleSchema = mongoose.Schema({
   grade: {
     type: String,
   },
+  userId: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Bottle", BottleSchema);

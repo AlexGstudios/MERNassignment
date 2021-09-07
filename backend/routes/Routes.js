@@ -4,7 +4,7 @@ const passportConfig = require("../passport");
 const userActions = require("./actions/UserActions");
 const bottleActions = require("./actions/BottleActions");
 const whiskyActions = require("./actions/WhiskyActions");
-const errorResponse = require("./actions/Responses");
+const { errorResponse } = require("./actions/Responses");
 const router = express.Router();
 
 router.post("/register", (req, res) => {

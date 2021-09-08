@@ -4,7 +4,7 @@ const { messageResponse, errorResponse } = require("./Responses");
 
 const signToken = (userId) => {
   return jwt.sign(
-    { iss: "Whisky Collectors AB", sub: userId },
+    { iss: "Whisky Collectors", sub: userId },
     process.env.WHISKYDB_SECRET,
     {
       expiresIn: 3600 * 24 * 60 * 60,
@@ -33,14 +33,14 @@ const registerUser = (req, res) => {
       return errorResponse(res);
     }
     if (user) {
-      return errorResponse(res, 400, "User already exists");
+      errorResponse(res, 400, "User already exists");
     } else {
       const newUser = new User({ username, password });
       newUser.save((err) => {
         if (err) {
-          return errorResponse(res);
+          errorResponse(res);
         } else {
-          return messageResponse(res, "Successfully registered");
+          messageResponse(res, "Successfully registered");
         }
       });
     }

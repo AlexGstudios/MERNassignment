@@ -19,10 +19,6 @@ router.post(
   }
 );
 
-router.get("/whisky", (req, res) => {
-  whiskyActions.findWhisky(req, res);
-});
-
 router
   .route("/:name")
   .get(passport.authenticate("jwt", { session: false }), (req, res) => {
@@ -33,6 +29,10 @@ router
         return userActions.logoutUser(res);
       case "getbottles":
         return bottleActions.getAllBottles(req, res);
+      case "bottles":
+        return bottleActions.getSingleBottle(req, res);
+      case "whisky":
+        return whiskyActions.findWhisky(req, res);
       default:
         errorResponse(res, 404, "Page not found");
     }
@@ -49,6 +49,8 @@ router
     switch (req.params.name) {
       case "updateuser":
         return userActions.updateUser(req, res);
+      case "bottles":
+        return bottleActions.updateBottle(req, res);
       default:
         errorResponse(res, 404, "Page not found");
     }
@@ -57,21 +59,11 @@ router
     switch (req.params.name) {
       case "deleteuser":
         return userActions.deleteUser(req, res);
+      case "bottles":
+        return bottleActions.deleteBottle(req, res);
       default:
         errorResponse(res, 404, "Page not found");
     }
-  });
-
-router
-  .route("/bottles/:id")
-  .get(passport.authenticate("jwt", { session: false }), (req, res) => {
-    return bottleActions.getSingleBottle(req, res);
-  })
-  .put(passport.authenticate("jwt", { session: false }), (req, res) => {
-    return bottleActions.updateBottle(req, res);
-  })
-  .delete(passport.authenticate("jwt", { session: false }), (req, res) => {
-    return bottleActions.deleteBottle(req, res);
   });
 
 module.exports = router;

@@ -1,7 +1,6 @@
 const Whisky = require("../../models/Whisky");
 const { messageResponse, errorResponse } = require("./Responses");
 
-// search by title or region, using "search" req arg, max 10 results
 const findWhisky = (req, res) => {
   Whisky.find(
     {

@@ -12,7 +12,7 @@ const getAllBottles = (req, res) => {
 };
 
 const getSingleBottle = (req, res) => {
-  Bottle.find({ _id: req.params.id, userId: req.user._id }, (err, bottle) => {
+  Bottle.find({ _id: req.query.id, userId: req.user._id }, (err, bottle) => {
     if (err) {
       return errorResponse(res);
     }
@@ -36,7 +36,7 @@ const saveBottle = (req, res) => {
 };
 
 const updateBottle = (req, res) => {
-  Bottle.find({ _id: req.params.id, userId: req.user._id }, (err, bottle) => {
+  Bottle.find({ _id: req.query.id, userId: req.user._id }, (err, bottle) => {
     if (err) {
       return errorResponse(res);
     }
@@ -55,7 +55,7 @@ const updateBottle = (req, res) => {
 };
 
 const deleteBottle = (req, res) => {
-  Bottle.find({ _id: req.params.id, userId: req.user._id }, (err, bottle) => {
+  Bottle.find({ _id: req.query.id, userId: req.user._id }, (err, bottle) => {
     if (err) {
       return errorResponse(res);
     }

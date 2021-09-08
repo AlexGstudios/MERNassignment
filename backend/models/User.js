@@ -10,12 +10,6 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  bottles: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Bottle",
-    },
-  ],
 });
 
 UserSchema.pre("save", function (next) {
@@ -31,15 +25,20 @@ UserSchema.pre("save", function (next) {
   });
 });
 
-UserSchema.methods.comparePassword = function (password, callback) {
+UserSchema.methods.comparePassword = function (
+  password,
+  callback,
+  newPassword,
+  res
+) {
   bcrypt.compare(password, this.password, (err, isMatch) => {
     if (err) {
-      return callback(err);
+      return callback(err, null, null, res);
     }
     if (!isMatch) {
-      return callback(null, isMatch);
+      return callback(null, isMatch, null, res);
     }
-    return callback(null, this);
+    return callback(null, this, newPassword, res);
   });
 };
 

@@ -11,7 +11,7 @@ app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
-app.use("/", router);
+app.use("/api", router);
 
 mongoose.connect(
   _DB_CON,

@@ -14,7 +14,7 @@ const signToken = (userId) => {
 
 const checkAuth = (req, res) => {
   const { _id, username } = req.user;
-  messageResponse(res, "Authenticated", true, { _id, username });
+  messageResponse(res, { _id, username }, true);
 };
 
 const loginUser = (req, res) => {
@@ -22,7 +22,7 @@ const loginUser = (req, res) => {
     const { _id, username } = req.user;
     const token = signToken(_id);
     res.cookie("authToken", token, { httpOnly: true, sameSite: true });
-    messageResponse(res, "Successfully logged in", true, { _id, username });
+    messageResponse(res, { _id, username }, true);
   }
 };
 
@@ -60,7 +60,7 @@ const changePassword = (err, user, newPassword, res) => {
       if (err) {
         errorResponse(res);
       } else {
-        messageResponse(res, "Password changed");
+        messageResponse(res, "Password changed", true);
       }
     });
   }
@@ -77,14 +77,14 @@ const deleteUser = (req, res) => {
       errorResponse(res);
     } else {
       res.clearCookie("authToken");
-      messageResponse(res, "User deleted", false, { username: "" });
+      messageResponse(res, "User deleted", false);
     }
   });
 };
 
 const logoutUser = (res) => {
   res.clearCookie("authToken");
-  messageResponse(res, "Logged out", false, { username: "" });
+  messageResponse(res, "Logged out", false);
 };
 
 module.exports = {

@@ -8,7 +8,7 @@ import { Whisky } from './components/views/Whisky';
 import { Account } from './components/views/Account'
 import { Footer } from './components/fixed/Footer';
 import { PrivateRoute } from './hooks/PrivateRoute';
-import { UnPrivate } from './hooks/UnProvate';
+import { UnPrivate } from './hooks/UnPrivate';
 import './App.css';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
     <Router>
       <Navbar />
       <Route exact path="/" component={Home} />
-      <Route exact path="/login" component={Login} />
+      <UnPrivate path="/login" component={Login} />
       <UnPrivate path="/register" component={Register} />
       <PrivateRoute path="/whisky" component={Whisky} />
       <PrivateRoute path="/account" component={Account} />

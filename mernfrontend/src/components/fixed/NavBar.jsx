@@ -14,6 +14,8 @@ export const Navbar = () => {
             setActiveUser(data.message.msgBody);
             setAuthenticated(false);
             history.push("/login");
+        }else{
+            alert("Unable to logout!");
         }
     }
     

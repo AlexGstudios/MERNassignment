@@ -77,7 +77,6 @@ body{
 }
 
 .bottle input{
-  /* fixa */
   display: flex;
   color: #000;
 }

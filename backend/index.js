@@ -4,8 +4,8 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const router = require("./routes/Routes");
 
-const _DB_CON = process.env.WHISKYDB_URI || "mongodb+srv://azeam:oPEpuUWqt9DVLIHt@whisky.5bakc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const _PORT = process.env.WHISKYDB_PORT || 5005;
+const _DB_CON = process.env.WHISKYDB_URI
+const _PORT = process.env.WHISKYDB_PORT;
 
 app = express();
 app.use(cookieParser());

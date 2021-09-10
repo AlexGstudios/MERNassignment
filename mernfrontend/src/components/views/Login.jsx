@@ -21,6 +21,8 @@ export const Login = () => {
             setAuthenticated(isAuthenticated);
             setActiveUser(message.msgBody)
             history.push("/whisky");
+        }else{
+            alert("Something went wrong with your login");
         }
     }
 

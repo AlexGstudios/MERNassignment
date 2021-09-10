@@ -20,7 +20,7 @@ export const Bottle = ({props}) => {
 
     return(
         <div className="bottle">
-            <form onClick={editBottle}>
+            <form onSubmit={editBottle}>
                 <p>Name:</p>
                 <input type="text" name="name" onChange={changeData} placeholder={props.name}></input>
                 <p>Size:</p>

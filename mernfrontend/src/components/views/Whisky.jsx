@@ -12,7 +12,6 @@ export const Whisky = () => {
 
     const getBottle = async () => {
         const data = await AuthService("getbottles");
-        setAuthenticated(data.isAuthenticated);
         setUserBottles(data.message.msgBody);
     }
 

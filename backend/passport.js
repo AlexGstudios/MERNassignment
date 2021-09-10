@@ -15,7 +15,7 @@ passport.use(
   new jwtStrategy(
     {
       jwtFromRequest: cookieExtractor,
-      secretOrKey: "supersecret",
+      secretOrKey: process.env.WHISKYDB_SECRET,
     },
     (payload, done) => {
       User.findById({ _id: payload.sub }, (err, user) => {

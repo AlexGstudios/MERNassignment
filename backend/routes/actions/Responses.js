@@ -4,7 +4,6 @@ const errorResponse = (
   message = "An error has occurred"
 ) => {
   return res.status(statusCode).json({
-    // ändrade här fron error till message
     message: {
       msgBody: message,
       msgError: true,

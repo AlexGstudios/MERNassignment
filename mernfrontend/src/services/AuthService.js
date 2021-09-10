@@ -1,7 +1,6 @@
 const AuthService = async (action, method, data) => {
   const _unAuthorizedUserObject = {
     isAuthenticated: false,
-    user: { _id: null, username: "" },
     message: { msgBody: "Not authorized", msgError: true },
   };
 

@@ -22,7 +22,7 @@ export const Login = () => {
             setActiveUser(message.msgBody)
             history.push("/whisky");
         }else{
-            alert("Something went wrong with your login");
+            alert(data.message.msgBody);
         }
     }
 

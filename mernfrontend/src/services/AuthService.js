@@ -1,7 +1,7 @@
 const AuthService = async (action, method, data) => {
   const _unAuthorizedUserObject = {
     isAuthenticated: false,
-    message: { msgBody: "Not authorized", msgError: true },
+    message: { msgBody: "Not authorized", msgError: true},
   };
 
   const _dataObject = (method) => {

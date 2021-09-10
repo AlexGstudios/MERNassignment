@@ -10,9 +10,15 @@ const AuthProvider = ({children}) => {
 
     const checkAuth = async () => {
         const data = await AuthService("authenticated");
-        setActiveUser(data.message.msgBody);
-        setAuthenticated(data.isAuthenticated);
-        setIsLoaded(true);
+        if(data === undefined){
+            setActiveUser({_id: "", username: ""});
+            setAuthenticated(false);
+            setIsLoaded(true);
+        }else{
+            setActiveUser(data.message.msgBody);
+            setAuthenticated(data.isAuthenticated);
+            setIsLoaded(true);
+        }
     }
 
     useEffect(() => {

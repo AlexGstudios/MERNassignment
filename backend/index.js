@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const router = require("./routes/Routes");
 
-const _DB_CON = process.env.WHISKYDB_URI;
+const _DB_CON = process.env.WHISKYDB_URI
 const _PORT = process.env.WHISKYDB_PORT;
 
 app = express();

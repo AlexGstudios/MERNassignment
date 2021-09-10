@@ -4,7 +4,7 @@ const errorResponse = (
   message = "An error has occurred"
 ) => {
   return res.status(statusCode).json({
-    error: {
+    message: {
       msgBody: message,
       msgError: true,
     },

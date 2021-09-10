@@ -4,9 +4,11 @@ import { Navbar } from './components/fixed/NavBar';
 import { Home } from './components/views/Home';
 import { Login } from './components/views/Login';
 import { Register } from './components/views/Register';
-import { Map } from './components/views/Map';
+import { Whisky } from './components/views/Whisky';
 import { Account } from './components/views/Account'
 import { Footer } from './components/fixed/Footer';
+import { PrivateRoute } from './hooks/PrivateRoute';
+import { UnPrivate } from './hooks/UnProvate';
 import './App.css';
 
 function App() {
@@ -15,9 +17,9 @@ function App() {
       <Navbar />
       <Route exact path="/" component={Home} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Register} />
-      <Route exact path="/map" component={Map} />
-      <Route exact path="/account" component={Account} />
+      <UnPrivate path="/register" component={Register} />
+      <PrivateRoute path="/whisky" component={Whisky} />
+      <PrivateRoute path="/account" component={Account} />
       <Footer />
     </Router>
   );

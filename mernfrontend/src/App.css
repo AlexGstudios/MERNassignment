@@ -1,0 +1,199 @@
+body{
+  background-color: rgb(50, 73, 58);
+  color: #FFF;
+  margin: 0 0 0 0;
+}
+
+::placeholder{
+  background-color: rgba(0,0,0,1);
+  color: rgb(255, 255, 255, 1);
+}
+
+/* Navbar */
+
+.navbar{
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navbar a{
+  color: #f2f2f2;
+  padding: 14px 16px;
+  border-radius: 5%;
+  text-decoration: none;
+  height: 5%;
+}
+
+.navbar a:hover{
+  background: #ddd;
+  color: black;
+}
+
+/* Footer */
+
+.footer{
+  margin-top: 1rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #333;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* home view */
+
+.home{
+  padding: 5%;
+  text-align: center;
+}
+
+/* whisky view */
+
+.whisky{
+  padding: 5%;
+  display: grid;
+  text-align: center;
+}
+
+.newbottle{
+  position: sticky;
+  top: 0;
+  right: 0;
+  width: fit-content;
+}
+
+.bottle{
+  padding: 2%;
+  display: flex;
+  color: #fff;
+}
+
+.bottle input{
+  /* fixa */
+  display: flex;
+  color: #000;
+}
+
+.bottle button{
+  margin-top: 1%;
+  margin-left: 1%;
+  height: fit-content;
+}
+
+/* Modal */
+
+.Modal{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  transform: translate(-50%, -50%);
+  background-color: #333;
+  color: black;
+  padding: 50px;
+  z-index: 1000;
+}
+
+.overlay{
+  position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1000;
+}
+
+.newbottleback{
+  position: fixed;
+  top: 5%;
+  right: 5%;
+}
+
+/* register view */
+
+.registerview{
+  margin-top: 10%;
+  text-align: center;
+}
+
+.register{
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.registerwindow{
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  padding: 2%;
+  border-radius: 5%;
+}
+
+.registerwindow input{
+  margin: 5px 10px;
+  border-radius: 5%;
+}
+
+.registerwindow button{
+  margin-top: 10%;
+}
+
+/* login view */
+
+.logview{
+  margin-top: 10%;
+  text-align: center;
+}
+
+.login{
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.loginwindow{
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  padding: 2%;
+  border-radius: 5%;
+}
+
+.loginwindow input{
+  margin: 5px 10px;
+  border-radius: 5%;
+}
+
+.loginwindow a{
+  color: #FFF ;
+}
+
+.loginwindow a:hover{
+  padding: 3px;
+  background-color: #f2f2f2;
+  color: black;
+  border-radius: 5%;
+}
+
+.loginwindow button{
+  margin-top: 10%;
+}
+
+/* account view */
+
+.account{
+  padding: 5%;
+  text-align: center;
+}

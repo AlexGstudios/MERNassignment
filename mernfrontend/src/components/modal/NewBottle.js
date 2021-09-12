@@ -1,25 +1,42 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import ReactDOM from "react-dom";
 import AuthService from "../../services/AuthService";
 
-export const Modal = ({open, onClose}) => {
+export const Modal = ({props, open, onClose, title, reload, standardInfo}) => {
 
-    const [info, setInfo] = useState({
-        name: "",
-        size: "",
-        price: "",
-        destillery: "",
-        rating: "",
-        region: ""
-    });
+    const _standardInfo = {
+        name: "Name",
+        size: "Size",
+        price: "Price",
+        destillery: "Destillery",
+        rating: "Rating",
+        region: "Region"
+    }
+
+    const [info, setInfo] = useState(_standardInfo);
+
+    useEffect(() => {
+        if(title === "Edit Bottle"){
+            setInfo(props);
+        }
+        if(title === "New Bottle"){
+            setInfo(_standardInfo)
+        }
+    }, [])
 
     const changeInfo = (e) => {
         setInfo({...info, [e.target.name]: e.target.value});
     }
 
-    const newBottle = async (e) => {
+    const saveEdit = async (e) => {
         e.preventDefault();
-        const data = await AuthService("newbottle", "post", info);
+        if(title === "New Bottle"){
+            const data = await AuthService("newbottle", "post", info);
+            setInfo(_standardInfo)
+        }
+        if(title === "Edit Bottle"){
+            const data = await AuthService(`bottles?id=${props._id}`, "put", info);
+        }
     }
 
     if(!open){
@@ -30,17 +47,17 @@ export const Modal = ({open, onClose}) => {
         <div>
             <div className="overlay" onClick={onClose}></div>
             <div className="Modal">
-                <h2>New Bottle</h2>
+                <h2>{title}</h2>
                 <button className="newbottleback" onClick={onClose}>Back</button>
                 <div>
-                    <form onSubmit={newBottle}>
-                        <input type="name" name="name" onChange={changeInfo} placeholder="Name" />
-                        <input type="size" name="size" onChange={changeInfo} placeholder="Size" />
-                        <input type="price" name="price" onChange={changeInfo} placeholder="Price" />
-                        <input type="destillery" name="destillery" onChange={changeInfo} placeholder="Destillery" />
-                        <input type="rating" name="rating" onChange={changeInfo} placeholder="Rating" />
-                        <input type="region" name="region" onChange={changeInfo} placeholder="Region" />
-                        <button type="submit" >Submit</button>
+                    <form onSubmit={saveEdit}>
+                        <input type="name" name="name" onChange={changeInfo} placeholder={info.name} />
+                        <input type="size" name="size" onChange={changeInfo} placeholder={info.size} />
+                        <input type="price" name="price" onChange={changeInfo} placeholder={info.price} />
+                        <input type="destillery" name="destillery" onChange={changeInfo} placeholder={info.destillery} />
+                        <input type="rating" name="rating" onChange={changeInfo} placeholder={info.rating} />
+                        <input type="region" name="region" onChange={changeInfo} placeholder={info.region} />
+                        <button type="submit" onClick={reload} >Submit</button>
                     </form>
                 </div>
             </div>

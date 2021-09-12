@@ -6,26 +6,38 @@ import { Modal } from '../modal/NewBottle';
 
 export const Whisky = () => {
 
-    const { authenticated, setAuthenticated } = useContext(AuthContext);
+
+    const { authenticated} = useContext(AuthContext);
     const [userBottles, setUserBottles] = useState([]);
     const [isTrue, setIsTrue] = useState(false);
+    const [reLoad, setReLoad] = useState(false);
 
     const getBottle = async () => {
         const data = await AuthService("getbottles");
         setUserBottles(data.message.msgBody);
+        setReLoad(false)
+    }
+
+    const deleteBottle = async (_id) => {
+        if(_id === undefined){
+            return;
+        }else{
+            const data = await AuthService(`bottles?id=${_id}`, "delete");
+            setReLoad(true);
+        }
     }
 
     useEffect(() => {
         getBottle();
-    }, [userBottles]);
+    }, [reLoad]);
 
     return(
-        <div className="whisky">
+        <div className="whisky" >
             <button className="newbottle" onClick={() => {setIsTrue(true)}} >New Bottle</button>
-            <Modal open={isTrue} onClose={() => setIsTrue(false)} />
+            <Modal open={isTrue} onClose={() => setIsTrue(false)} reload={() => setReLoad(true)} title="New Bottle" />
             { authenticated ? Object.entries(userBottles).map(([key, value], i) => {
                 return(
-                    <Bottle key={i} props={value}></Bottle>
+                    <Bottle key={i} props={value} reload={setReLoad} deleteBottle={deleteBottle} ></Bottle>
                 )
             })
         :

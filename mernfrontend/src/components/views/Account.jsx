@@ -7,7 +7,7 @@ export const Account = () => {
 
     const { activeUser } = useContext(AuthContext);
     const [userPass, setUserPass] = useState({currentPassword: "", newPassword: ""});
-    const [isFlase, setIsFalse] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
     const [data, setData] = useState();
 
     const changeUserData = (e) => {
@@ -19,7 +19,7 @@ export const Account = () => {
         const data = await AuthService("updateuser", "put", userPass);
         if(data.isAuthenticated){
             setData(data);
-            setIsFalse(true);
+            setShowSuccess(true);
         }
     }
 
@@ -49,7 +49,7 @@ export const Account = () => {
             </div>
             <div>
                 {
-                    isFlase ? <h3>{data.message.msgBody}</h3>
+                    showSuccess ? <h3>{data.message.msgBody}</h3>
                     : <div></div>
                 }
             </div>

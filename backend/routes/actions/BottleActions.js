@@ -47,7 +47,7 @@ const updateBottle = (req, res) => {
         if (err) {
           errorResponse(res);
         } else {
-          messageResponse(res, "Bottle updated successfully");
+          messageResponse(res, "Bottle updated successfully", true);
         }
       });
     }
@@ -66,7 +66,7 @@ const deleteBottle = (req, res) => {
         if (err) {
           errorResponse(res);
         } else {
-          messageResponse(res, "Bottle deleted successfully");
+          messageResponse(res, "Bottle deleted successfully", true);
         }
       });
     }

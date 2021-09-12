@@ -32,10 +32,16 @@ export const Modal = ({props, open, onClose, title, reload, standardInfo}) => {
         e.preventDefault();
         if(title === "New Bottle"){
             const data = await AuthService("newbottle", "post", info);
-            setInfo(_standardInfo)
+            if(data.isAuthenticated){
+                reload(true);
+                setInfo(_standardInfo)
+            }
         }
         if(title === "Edit Bottle"){
             const data = await AuthService(`bottles?id=${props._id}`, "put", info);
+            if(data.isAuthenticated){
+                reload(true);
+            }
         }
     }
 
@@ -57,7 +63,7 @@ export const Modal = ({props, open, onClose, title, reload, standardInfo}) => {
                         <input type="destillery" name="destillery" onChange={changeInfo} placeholder={info.destillery} />
                         <input type="rating" name="rating" onChange={changeInfo} placeholder={info.rating} />
                         <input type="region" name="region" onChange={changeInfo} placeholder={info.region} />
-                        <button type="submit" onClick={reload} >Submit</button>
+                        <button type="submit" >Submit</button>
                     </form>
                 </div>
             </div>

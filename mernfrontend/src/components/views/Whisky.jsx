@@ -16,6 +16,7 @@ export const Whisky = () => {
         const data = await AuthService("getbottles");
         setUserBottles(data.message.msgBody);
         setReLoad(false)
+        console.log("körd")
     }
 
     const deleteBottle = async (_id) => {
@@ -28,7 +29,9 @@ export const Whisky = () => {
     }
 
     useEffect(() => {
-        getBottle();
+        if(!reLoad){
+            getBottle();
+        }
     }, [reLoad]);
 
     return(
